@@ -71,12 +71,21 @@
 						trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 					} else {
 						$stid = oci_parse($conn, 
-							'select e.ciasimg from tunal.datbasmails d, desarrollo.imagencompias e where d.cedula =' 
+							'select e.ciasimg, e.website from tunal.datbasmails d, desarrollo.imagencompias e where d.cedula =' 
+//							'select e.ciasimg from tunal.datbasmails d, desarrollo.imagencompias e where d.cedula =' 
 							.$cedula. ' and d.cias=e.ciassql');
 						oci_execute($stid);
 						while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+							$nro = 0;
 							foreach ($row as $item) {
-								$empresa = $item;
+								if ($nro == 0){
+									$empresa = $item;
+								}
+								else {
+									if ($nro == 1)
+										$website = $item;
+								}
+								$nro = $nro + 1;
 							}
 						}
 					}

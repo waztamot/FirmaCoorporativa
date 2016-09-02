@@ -38,7 +38,14 @@
 		} else {
 			$movilImg  = utf8_decode('Móvil:   +58 '.$movil);
 		}
+
 		$paginaImg = utf8_decode('http://www.eltunal.com');
+		if (isset($website)){
+			if (!empty(trim($website))){
+				$paginaImg = utf8_decode('http://'.$website);
+			}
+		}
+
 		$Nrolin	= 10;
 		
 		// 	Crear una imagen en blanco	
